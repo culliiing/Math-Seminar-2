@@ -15,6 +15,12 @@ namespace Math_Seminar_2
         MouseState previousMouseState;
 
         Texture2D texture;
+
+        public Texture2D Texture { get { return texture; } }
+
+        Rectangle hitbox;
+        public Rectangle Hitbox { get { return hitbox; } }
+
         Vector2 position;
         Vector2 direction; // angle determined by mouse position?
         float speed;
@@ -28,6 +34,8 @@ namespace Math_Seminar_2
             this.speed = speed;
             this.scale = radius / (texture.Width / 2);
             this.fired = false;
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
         
         // Make a ball with default variable values
@@ -38,6 +46,8 @@ namespace Math_Seminar_2
             this.speed = 400f;
             this.scale = 1;
             this.fired = false;
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public void Update(GameTime gameTime)

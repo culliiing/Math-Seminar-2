@@ -13,8 +13,12 @@ namespace Math_Seminar_2
 
         Texture2D ballTexture;
         Texture2D carTexture;
+        Texture2D pixel;
 
         Ball ball;
+
+        Car car;
+        public static bool paused = false;
 
         public Game1()
         {
@@ -40,16 +44,30 @@ namespace Math_Seminar_2
 
             ballTexture = Content.Load<Texture2D>("ball");
             carTexture = Content.Load<Texture2D>("Cloud");
+            pixel = Content.Load<Texture2D>("1x1 pixel");
 
             ball = new Ball(ballTexture);
+            car = new Car(carTexture);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (paused)
+            {
 
-            ball.Update(gameTime);
+            }
+            else
+            {
+                ball.Update(gameTime);
+                car.Update(gameTime);
+                Collision.HandleCollision(car, ball);
+
+            }
+
+
+
 
             base.Update(gameTime);
         }
@@ -60,6 +78,8 @@ namespace Math_Seminar_2
 
             spriteBatch.Begin();
             ball.Draw(spriteBatch);
+            spriteBatch.Draw(pixel, new Rectangle(600, 400, 10, 10), Color.Black);
+            car.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
