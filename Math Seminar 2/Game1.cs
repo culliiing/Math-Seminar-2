@@ -14,6 +14,8 @@ namespace Math_Seminar_2
         Texture2D ballTexture;
         Texture2D carTexture;
 
+        Ball ball;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,6 +40,8 @@ namespace Math_Seminar_2
 
             ballTexture = Content.Load<Texture2D>("ball");
             carTexture = Content.Load<Texture2D>("Cloud");
+
+            ball = new Ball(ballTexture);
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,7 +49,7 @@ namespace Math_Seminar_2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            ball.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -54,7 +58,9 @@ namespace Math_Seminar_2
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            ball.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
