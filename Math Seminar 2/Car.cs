@@ -55,13 +55,13 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, hitbox, null, Color.White, rotation, orbitingOrigin,SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, null, Color.White, rotation, orbitingOrigin, 1f,SpriteEffects.None, 0);
             DrawHitbox(spriteBatch);
         }
 
         public void DrawHitbox(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture2, hitbox, null, Color.Green, rotation, orbitingOrigin, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, hitbox, null, Color.Black, rotation, orbitingOrigin, SpriteEffects.None, 1);
         }
 
     }
