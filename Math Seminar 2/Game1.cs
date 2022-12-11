@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Spline;
+using System.IO;
 
 namespace Math_Seminar_2
 {
@@ -15,6 +17,8 @@ namespace Math_Seminar_2
         Texture2D carTexture;
 
         Ball ball;
+        Car car;
+        SimplePath path;
 
         public Game1()
         {
@@ -42,6 +46,8 @@ namespace Math_Seminar_2
             carTexture = Content.Load<Texture2D>("Cloud");
 
             ball = new Ball(ballTexture);
+            path = new SimplePath(graphics.GraphicsDevice);
+            car = new Car(carTexture, path);
         }
 
         protected override void Update(GameTime gameTime)
@@ -50,6 +56,7 @@ namespace Math_Seminar_2
                 Exit();
 
             ball.Update(gameTime);
+            car.Update();
 
             base.Update(gameTime);
         }
@@ -60,6 +67,7 @@ namespace Math_Seminar_2
 
             spriteBatch.Begin();
             ball.Draw(spriteBatch);
+            car.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
