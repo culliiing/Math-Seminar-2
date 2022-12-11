@@ -11,6 +11,9 @@ namespace Math_Seminar_2
 
         public static Point windowSize;
 
+        Texture2D ballTexture;
+        Texture2D carTexture;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,7 +36,8 @@ namespace Math_Seminar_2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            ballTexture = Content.Load<Texture2D>("ball");
+            carTexture = Content.Load<Texture2D>("Cloud");
         }
 
         protected override void Update(GameTime gameTime)
