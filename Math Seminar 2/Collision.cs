@@ -27,7 +27,7 @@ namespace Math_Seminar_2
 
             for (int y = top; y < bottom; y++)
             {
-                for (int x = left; x > right; x++)
+                for (int x = left; x < right; x++)
                 {
                     Color colorA = dataA[(x-car.Hitbox.Left) + (y-car.Hitbox.Top) * car.Hitbox.Width];
                     Color colorB = dataB[(x-ball.Hitbox.Left) + (y-ball.Hitbox.Top) * ball.Hitbox.Width];

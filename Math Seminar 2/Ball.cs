@@ -55,6 +55,9 @@ namespace Math_Seminar_2
             previousMouseState = mouseState;
             mouseState = Mouse.GetState();
 
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
+
             if (fired)
                 position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             else

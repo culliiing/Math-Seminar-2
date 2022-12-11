@@ -47,7 +47,7 @@ namespace Math_Seminar_2
             pixel = Content.Load<Texture2D>("1x1 pixel");
 
             ball = new Ball(ballTexture);
-            car = new Car(carTexture);
+            car = new Car(carTexture, pixel);
         }
 
         protected override void Update(GameTime gameTime)
@@ -78,7 +78,7 @@ namespace Math_Seminar_2
 
             spriteBatch.Begin();
             ball.Draw(spriteBatch);
-            spriteBatch.Draw(pixel, new Rectangle(600, 400, 10, 10), Color.Black);
+            //spriteBatch.Draw(pixel, new Rectangle(600, 400, 10, 10), Color.Black);
             car.Draw(spriteBatch);
             spriteBatch.End();
 
