@@ -55,8 +55,7 @@ namespace Math_Seminar_2
             previousMouseState = mouseState;
             mouseState = Mouse.GetState();
 
-            hitbox.X = (int)position.X;
-            hitbox.Y = (int)position.Y;
+            UpdateHitbox();
 
             if (fired)
                 position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -70,13 +69,19 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position /*+ new Vector2(texture.Width/2, texture.Height/2)*/, null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
             DrawHitbox(spriteBatch);
+        }
+
+        private void UpdateHitbox()
+        {
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
         }
 
         public void DrawHitbox(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, hitbox, null, Color.Black, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
     }
 }

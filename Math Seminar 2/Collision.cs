@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Math_Seminar_2
 {
@@ -29,10 +25,10 @@ namespace Math_Seminar_2
             {
                 for (int x = left; x < right; x++)
                 {
-                    Color colorA = dataA[(x-car.Hitbox.Left) + (y-car.Hitbox.Top) * car.Hitbox.Width];
-                    Color colorB = dataB[(x-ball.Hitbox.Left) + (y-ball.Hitbox.Top) * ball.Hitbox.Width];
+                    Color colorA = dataA[(x - car.Hitbox.Left) + (y - car.Hitbox.Top) * car.Hitbox.Width];
+                    Color colorB = dataB[(x - ball.Hitbox.Left) + (y - ball.Hitbox.Top) * ball.Hitbox.Width];
 
-                    if (colorA.A !=0 && colorB.A !=0)
+                    if (colorA.A != 0 && colorB.A != 0)
                     {
                         return true;
                     }
@@ -40,7 +36,6 @@ namespace Math_Seminar_2
             }
 
             return false;
-
         }
 
         public static bool IntersectCollision(Car car, Ball ball)
@@ -50,15 +45,11 @@ namespace Math_Seminar_2
 
         public static void HandleCollision(Car car, Ball ball)
         {
-            //if (IntersectCollision(car, ball))
-
-            if (PixelCollision(car, ball))
+            if (PixelCollision(car, ball) && Game1.paused == false)
             {
                 Debug.WriteLine("collision!");
                 Game1.paused = true;
             }
-
-
         }
     }
 }

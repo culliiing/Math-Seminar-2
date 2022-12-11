@@ -47,13 +47,14 @@ namespace Math_Seminar_2
             pixel = Content.Load<Texture2D>("1x1 pixel");
 
             ball = new Ball(ballTexture);
-            car = new Car(carTexture, pixel);
+            car = new Car(carTexture);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             if (paused)
             {
 
@@ -63,11 +64,7 @@ namespace Math_Seminar_2
                 ball.Update(gameTime);
                 car.Update(gameTime);
                 Collision.HandleCollision(car, ball);
-
             }
-
-
-
 
             base.Update(gameTime);
         }
