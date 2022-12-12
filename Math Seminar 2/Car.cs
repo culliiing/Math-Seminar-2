@@ -53,7 +53,6 @@ namespace Math_Seminar_2
             if (movingForward)
             {
                 carPos += speed;
-
             }
             else
             {
