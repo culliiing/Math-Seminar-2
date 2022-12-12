@@ -20,6 +20,7 @@ namespace Math_Seminar_2
 
         Rectangle hitbox;
         public Rectangle Hitbox { get { return hitbox; } }
+        public Vector2 Position { get { return new Vector2(hitbox.X, hitbox.Y); } }
 
         Vector2 position;
         Vector2 direction; // angle determined by mouse position?
@@ -69,19 +70,19 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, Position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
             DrawHitbox(spriteBatch);
+        }
+
+        public void DrawHitbox(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
 
         private void UpdateHitbox()
         {
             hitbox.X = (int)position.X;
             hitbox.Y = (int)position.Y;
-        }
-
-        public void DrawHitbox(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
     }
 }
