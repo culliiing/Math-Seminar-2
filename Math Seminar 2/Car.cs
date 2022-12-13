@@ -127,15 +127,15 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            DrawPath(spriteBatch);
+            //DrawPath(spriteBatch);
 
             spriteBatch.Draw(texture, path.GetPos(carPos), null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
 
-        public void DrawPath(SpriteBatch spriteBatch)
-        {
-            path.Draw(spriteBatch);
-            path.DrawPoints(spriteBatch);
-        }
+        //public void DrawPath(SpriteBatch spriteBatch)
+        //{
+        //    path.Draw(spriteBatch);
+        //    path.DrawPoints(spriteBatch);
+        //}
     }
 }
