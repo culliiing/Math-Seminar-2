@@ -63,7 +63,7 @@ namespace Math_Seminar_2
 
         public void DrawHitbox(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
         }
 
         private void UpdateHitbox()
