@@ -55,8 +55,19 @@ namespace Math_Seminar_2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            ball.Update(gameTime);
-            car.Update();
+            if (paused)
+            {
+
+            }
+            else
+            {
+                ball.Update(gameTime);
+                car.Update(gameTime);  
+            }
+
+            if (ball.Intersects(car))
+                Collision.HandleCollision(car, ball);
+
             base.Update(gameTime);
         }
 

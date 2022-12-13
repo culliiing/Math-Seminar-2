@@ -1,40 +1,38 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Math_Seminar_2
 {
-    internal class Ball
+    internal class Ball : Sprite
     {
         MouseState mouseState;
         MouseState previousMouseState;
 
-        Texture2D texture;
-        Vector2 position;
+        public Texture2D Texture { get { return texture; } }
+
+        Rectangle hitbox;
+        public Rectangle Hitbox { get { return hitbox; } }
+
         Vector2 direction; // angle determined by mouse position?
         float speed;
         float scale;
         bool fired;
 
-        public Ball(Texture2D texture, float speed, float radius)
+        public Ball(Texture2D texture, float speed, float radius) : base(texture)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
+            this.position = new Vector2(0, Game1.windowSize.Y - this.texture.Height);
             this.speed = speed;
             this.scale = radius / (texture.Width / 2);
             this.fired = false;
         }
-        
+
         // Make a ball with default variable values
-        public Ball(Texture2D texture)
+        public Ball(Texture2D texture) : base(texture)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
+            this.position = new Vector2(0, Game1.windowSize.Y - this.texture.Height);
             this.speed = 400f;
             this.scale = 1;
             this.fired = false;
@@ -57,7 +55,19 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + new Vector2(texture.Width/2, texture.Height/2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+            DrawHitbox(spriteBatch);
+        }
+
+        private void UpdateHitbox()
+        {
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
+        }
+
+        public void DrawHitbox(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
     }
 }
