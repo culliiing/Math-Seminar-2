@@ -40,11 +40,6 @@ namespace Math_Seminar_2
             return false;
         }
 
-        public static bool IntersectCollision(Car car, Ball ball)
-        {
-            return ball.Hitbox.Intersects(car.Hitbox);
-        }
-
         public static void HandleCollision(Car car, Ball ball)
         {
             if (PixelCollision(car, ball) && Game1.paused == false)
@@ -52,6 +47,20 @@ namespace Math_Seminar_2
                 Debug.WriteLine("collision!");
                 Game1.paused = true;
             }
+        }
+
+        public static bool Intersect(Ball ball)
+        {
+            Color[] pixels = new Color[ball.Texture.Width * ball.Texture.Height];
+            Color[] pixels2 = new Color[ball.Texture.Width * ball.Texture.Height];
+            ball.Texture.GetData<Color>(pixels2);
+            Game1.RenderTarget.GetData(0, ball.Hitbox, pixels, 0, pixels.Length);
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                if (pixels[i].A > 0.0f && pixels2[i].A > 0.0f)
+                    return true;
+            }
+            return false;
         }
     }
 }

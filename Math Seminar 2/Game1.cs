@@ -8,16 +8,19 @@ namespace Math_Seminar_2
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        static RenderTarget2D renderTarget;
+        public static RenderTarget2D RenderTarget { get { return renderTarget; } }
 
         public static Point windowSize;
 
         Texture2D ballTexture;
         Texture2D carTexture;
+        Texture2D transparentBackground;
         Texture2D pixel;
 
         Ball ball;
-
         Car car;
+
         public static bool paused = false;
 
         public Game1()
@@ -29,11 +32,13 @@ namespace Math_Seminar_2
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 720;
+            windowSize = new Point(1080, 720);
+
+            graphics.PreferredBackBufferWidth = windowSize.X;
+            graphics.PreferredBackBufferHeight = windowSize.Y;
             graphics.ApplyChanges();
 
-            windowSize = new Point(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            renderTarget = new RenderTarget2D(GraphicsDevice, Game1.windowSize.X, Game1.windowSize.Y);
 
             base.Initialize();
         }
@@ -42,12 +47,13 @@ namespace Math_Seminar_2
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            ballTexture = Content.Load<Texture2D>("ball");
+            transparentBackground = Content.Load<Texture2D>("transparentBackground");
             carTexture = Content.Load<Texture2D>("Cloud");
+            ballTexture = Content.Load<Texture2D>("ball");
             pixel = Content.Load<Texture2D>("1x1 pixel");
 
-            ball = new Ball(ballTexture);
             car = new Car(carTexture);
+            ball = new Ball(ballTexture);
         }
 
         protected override void Update(GameTime gameTime)
@@ -63,7 +69,10 @@ namespace Math_Seminar_2
             {
                 ball.Update(gameTime);
                 car.Update(gameTime);
-                Collision.HandleCollision(car, ball);
+                if (Collision.Intersect(ball))
+                {
+                    Game1.paused = true;
+                }
             }
 
             base.Update(gameTime);
@@ -71,15 +80,36 @@ namespace Math_Seminar_2
 
         protected override void Draw(GameTime gameTime)
         {
+            DrawOnRenderTarget();
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            spriteBatch.Draw(renderTarget, renderTarget.Bounds, Color.White);
             ball.Draw(spriteBatch);
-            //spriteBatch.Draw(pixel, new Rectangle(600, 400, 10, 10), Color.Black);
             car.Draw(spriteBatch);
+            //spriteBatch.Draw(pixel, new Rectangle(600, 400, 10, 10), Color.Black);
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void DrawOnRenderTarget()
+        {
+            //Ändra så att GraphicsDevice ritar mot vårt render target
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.Transparent);
+            spriteBatch.Begin();
+
+            //Rita ut texturen. Den ritas nu ut till vårt render target istället
+            //för på skärmen.
+            car.Draw(spriteBatch);
+            spriteBatch.Draw(transparentBackground, Vector2.Zero, Color.White);
+
+            spriteBatch.End();
+
+            //Sätt GraphicsDevice att åter igen peka på skärmen
+            GraphicsDevice.SetRenderTarget(null);
         }
     }
 }
