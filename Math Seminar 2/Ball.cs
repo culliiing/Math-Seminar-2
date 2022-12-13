@@ -15,11 +15,15 @@ namespace Math_Seminar_2
         MouseState previousMouseState;
 
         Texture2D texture;
+        public Texture2D Texture { get { return texture; } }
         Vector2 position;
         Vector2 direction; // angle determined by mouse position?
         float speed;
         float scale;
         bool fired;
+
+        Rectangle hitbox;
+        public Rectangle Hitbox { get { return hitbox; } }
 
         public Ball(Texture2D texture, float speed, float radius)
         {
@@ -28,6 +32,8 @@ namespace Math_Seminar_2
             this.speed = speed;
             this.scale = radius / (texture.Width / 2);
             this.fired = false;
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
         
         // Make a ball with default variable values
@@ -38,12 +44,16 @@ namespace Math_Seminar_2
             this.speed = 400f;
             this.scale = 1;
             this.fired = false;
+
+            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public void Update(GameTime gameTime)
         {
             previousMouseState = mouseState;
             mouseState = Mouse.GetState();
+
+            UpdateHitbox();
 
             if (fired)
                 position += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -66,10 +76,10 @@ namespace Math_Seminar_2
             //spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, 1, SpriteEffects.None, 0f);
         }
 
-        //private void UpdateHitbox()
-        //{
-        //    hitbox.X = (int)position.X;
-        //    hitbox.Y = (int)position.Y;
-        //}
+        private void UpdateHitbox()
+        {
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
+        }
     }
 }

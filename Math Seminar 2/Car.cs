@@ -35,23 +35,29 @@ namespace Math_Seminar_2
 
         bool movingForward = true;
 
-        Texture2D carTex;
+        Texture2D texture;
+        public Texture2D Texture { get { return texture; } }
 
         SimplePath path;
 
+        Rectangle hitbox;
+        public Rectangle Hitbox { get { return hitbox; } }
 
-        public Car(Texture2D carTex, SimplePath path)
+        public Car(Texture2D texture, SimplePath path)
         {
             this.path = path;
-            this.carTex = carTex;
+            this.texture = texture;
 
-            origin = new Vector2(carTex.Width / 2, carTex.Height / 2);
+            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            hitbox = new Rectangle((int)currentPos.X, (int)currentPos.Y, texture.Width, texture.Height);
 
             SetPath();
         }
 
         public void Update()
         {
+            hitbox.X = (int)currentPos.X;
+            hitbox.Y = (int)currentPos.Y;
 
             lastPos = path.GetPos(carPos); //takes last position to calculate direction
 
@@ -123,7 +129,7 @@ namespace Math_Seminar_2
         {
             DrawPath(spriteBatch);
 
-            spriteBatch.Draw(carTex, path.GetPos(carPos), null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, path.GetPos(carPos), null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
 
         public void DrawPath(SpriteBatch spriteBatch)
