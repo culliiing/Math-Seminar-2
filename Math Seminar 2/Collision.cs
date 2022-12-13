@@ -9,7 +9,7 @@ namespace Math_Seminar_2
         static Color[] dataA;
         static Color[] dataB;
 
-        //Hitbox does not rotate, research on it and Transformation Matrises here: https://en.wikipedia.org/wiki/Transformation_matrix
+        //Hitbox does not rotate, research on it and Transformation Matrises here: https://en.wikipedia.org/wiki/Transformation_matrix 
 
         public static bool PixelCollision(Car car, Ball ball)
         {
