@@ -14,45 +14,46 @@ namespace Math_Seminar_2
         public Texture2D Texture { get { return texture; } }
 
         Vector2 position;
-        Vector2 orbitingOrigin;
-        float rotation;
         float radius;
+        float speed;
+
+        Vector2 circleCenter = new Vector2(600, 400);
+        float angle;
 
         Rectangle hitbox;
-
         public Rectangle Hitbox { get { return hitbox; } }
 
-        public Car(Texture2D texture, float rotation, float radius)
+        public Car(Texture2D texture, float speed, float radius)
         {
             this.texture = texture;
-            this.rotation = rotation;
             this.radius = radius;
+            this.speed = speed;
 
-            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public Car(Texture2D texture)
         {
             this.texture = texture;
-            position = new Vector2(600, 400);
-            radius = 100;
-            orbitingOrigin = new Vector2(radius, radius);
-
-            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.radius = 100f;
+            this.speed = 1f;
+            this.hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public void Update(GameTime gameTime)
         {
-            hitbox.X = (int)position.X; // Only the rotation of the car changes, not the position, so these lines of code does nothing.
-            hitbox.Y = (int)position.Y; // Look up TRANSFORMATION MATRIX for rotating the hitbox alongside the sprite: https://en.wikipedia.org/wiki/Transformation_matrix
+            position = circleCenter + new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * radius;
+            angle += MathHelper.ToRadians(1f * speed);
 
-            rotation +=0.01f;
+            // OBS! Hitbox does not rotate
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, orbitingOrigin, 1f, SpriteEffects.None, 0);
-            DrawHitbox(spriteBatch);
+            spriteBatch.Draw(texture, position, null, Color.White, angle + MathHelper.Pi/2, new Vector2(Texture.Width / 2, Texture.Height / 2), 1f, SpriteEffects.None, 0f);
+            //DrawHitbox(spriteBatch);
         }
 
         public void DrawHitbox(SpriteBatch spriteBatch)
