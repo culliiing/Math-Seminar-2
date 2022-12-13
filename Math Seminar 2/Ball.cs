@@ -57,7 +57,19 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + new Vector2(texture.Width/2, texture.Height/2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, Position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            DrawHitbox(spriteBatch);
+        }
+
+        public void DrawHitbox(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        }
+
+        private void UpdateHitbox()
+        {
+            hitbox.X = (int)position.X;
+            hitbox.Y = (int)position.Y;
         }
     }
 }
