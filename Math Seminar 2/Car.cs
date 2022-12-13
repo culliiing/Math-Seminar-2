@@ -84,7 +84,7 @@ namespace Math_Seminar_2
                 distanceVector = new Vector2(lastPos.X - currentPos.X, lastPos.Y - currentPos.Y);
             }
 
-            angle = (float)Math.Atan2(distanceVector.Y - 0, distanceVector.X - 1);
+            angle = (float)Math.Atan2(distanceVector.Y, distanceVector.X);
 
             angle = MathHelper.ToDegrees(angle);
 
@@ -97,8 +97,8 @@ namespace Math_Seminar_2
             {
                 angle = -maxAngle;
             }
-
-            Debug.WriteLine(angle.ToString());
+            //Debug.WriteLine(distanceVector.ToString());
+            //Debug.WriteLine(angle.ToString());
 
             rotation = MathHelper.ToRadians(angle);
 
