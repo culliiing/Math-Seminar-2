@@ -15,7 +15,7 @@ namespace Math_Seminar_2
     internal class Car // or class for path on which travelling objects can be made
     {
 
-        float maxAngle = 90f;
+        //float maxAngle = 90f;
 
         Vector2 velocity; // vinkelhastiget?
 
@@ -88,15 +88,15 @@ namespace Math_Seminar_2
 
             angle = MathHelper.ToDegrees(angle);
 
-            if (angle >= maxAngle)
-            {
-                angle = maxAngle;
-            }
+            //if (angle >= maxAngle)
+            //{
+            //    angle = maxAngle;
+            //}
 
-            if (angle <= -maxAngle)
-            {
-                angle = -maxAngle;
-            }
+            //if (angle <= -maxAngle)
+            //{
+            //    angle = -maxAngle;
+            //}
             //Debug.WriteLine(distanceVector.ToString());
             //Debug.WriteLine(angle.ToString());
 
