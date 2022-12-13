@@ -47,11 +47,10 @@ namespace Math_Seminar_2
 
         public static void HandleCollision(Car car, Ball ball)
         {
-            if (PixelCollision(car, ball) && Game1.paused == false)
-            {
+            
                 Debug.WriteLine("collision!");
                 Game1.paused = true;
-            }
+            
         }
     }
 }

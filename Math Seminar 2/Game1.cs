@@ -62,8 +62,7 @@ namespace Math_Seminar_2
             else
             {
                 ball.Update(gameTime);
-                car.Update(gameTime);
-                Collision.HandleCollision(car, ball);
+                car.Update(gameTime);  
             }
 
             base.Update(gameTime);
