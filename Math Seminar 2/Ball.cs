@@ -16,7 +16,7 @@ namespace Math_Seminar_2
 
         Texture2D texture;
         public Texture2D Texture { get { return texture; } }
-        Vector2 position;
+        public Vector2 position;
         Vector2 direction; // angle determined by mouse position?
         float speed;
         float scale;

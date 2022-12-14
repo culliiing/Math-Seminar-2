@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Spline;
+using System.Diagnostics;
 using System.IO;
 
 namespace Math_Seminar_2
@@ -13,6 +14,7 @@ namespace Math_Seminar_2
 
         public static Point windowSize;
 
+        public static double timer;
         Texture2D ballTexture;
         Texture2D carTexture;
 
@@ -67,6 +69,7 @@ namespace Math_Seminar_2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            timer += gameTime.ElapsedGameTime.TotalSeconds;
             if (paused)
             {
 
@@ -77,6 +80,8 @@ namespace Math_Seminar_2
                 car.Update();
                 if (Collision.Intersect(ball))
                 {
+                    Debug.WriteLine("position: " + ball.position + " time: " + Game1.timer.ToString());
+
                     Game1.paused = true;
                 }
             }

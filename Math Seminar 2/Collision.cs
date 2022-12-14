@@ -8,7 +8,6 @@ namespace Math_Seminar_2
     {
         static Color[] dataA;
         static Color[] dataB;
-
         //Hitbox does not rotate, research on it and Transformation Matrises here: https://en.wikipedia.org/wiki/Transformation_matrix 
 
         public static bool PixelCollision(Car car, Ball ball)
@@ -44,7 +43,7 @@ namespace Math_Seminar_2
         {
             if (PixelCollision(car, ball) && Game1.paused == false)
             {
-                Debug.WriteLine("collision!");
+                
                 Game1.paused = true;
             }
         }
