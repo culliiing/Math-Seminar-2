@@ -26,29 +26,29 @@ namespace Math_Seminar_2
         Vector2 direction; // angle determined by mouse position?
         float speed;
         float scale;
+        public float Scale { get { return scale; } }
         bool fired;
 
         public Ball(Texture2D texture, float speed, float radius)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
-            this.speed = speed;
             this.scale = radius / (texture.Width / 2);
+            this.position = new Vector2(0 + texture.Width*scale/2, Game1.windowSize.Y-texture.Height*scale/2);
+            this.speed = speed;
             this.fired = false;
 
-            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.hitbox = new Rectangle((int)position.X - texture.Width * (int)scale / 2, (int)position.Y - texture.Height * (int)scale / 2, texture.Width * (int)scale, texture.Height * (int)scale);
         }
         
         // Make a ball with default variable values
         public Ball(Texture2D texture)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
+            this.position = new Vector2(0 + texture.Width, Game1.windowSize.Y-this.texture.Height);
             this.speed = 400f;
             this.scale = 1;
             this.fired = false;
-
-            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public void Update(GameTime gameTime)
@@ -70,19 +70,19 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            //spriteBatch.Draw(texture, position/*Position + new Vector2(texture.Width*scale / 2, texture.Height*scale / 2)*/, null, Color.White, 0, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
             DrawHitbox(spriteBatch);
         }
 
         public void DrawHitbox(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, hitbox, null, Color.Green * 0.5f, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, hitbox, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
 
         private void UpdateHitbox()
         {
-            hitbox.X = (int)position.X;
-            hitbox.Y = (int)position.Y;
+            hitbox.X = (int)position.X - texture.Width * (int)scale/2;
+            hitbox.Y = (int)position.Y - texture.Height * (int)scale/2;
         }
     }
 }

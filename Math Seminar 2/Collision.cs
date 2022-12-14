@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using SharpDX.Direct2D1.Effects;
 using System;
 using System.Diagnostics;
 
@@ -51,7 +52,7 @@ namespace Math_Seminar_2
 
         public static bool Intersect(Ball ball)
         {
-            Color[] pixels = new Color[ball.Texture.Width * ball.Texture.Height];
+            Color[] pixels = new Color[ball.Texture.Width * ball.Texture.Height * (int)ball.Scale * (int)ball.Scale];
             Color[] pixels2 = new Color[ball.Texture.Width * ball.Texture.Height];
             ball.Texture.GetData<Color>(pixels2);
 
@@ -65,8 +66,8 @@ namespace Math_Seminar_2
                 }
             } 
             catch 
-            { 
-                Game1.paused = true; 
+            {
+                Game1.paused = true;
             }
 
             return false;
