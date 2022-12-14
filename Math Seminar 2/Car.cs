@@ -15,13 +15,12 @@ namespace Math_Seminar_2
     internal class Car // or class for path on which travelling objects can be made
     {
 
-        //float maxAngle = 90f;
 
         Vector2 velocity; // vinkelhastiget?
 
         Vector2 origin;
 
-        Vector2 distanceVector;
+        Vector2 directionVector;
 
         float speed = 3;
 
@@ -83,28 +82,14 @@ namespace Math_Seminar_2
 
             if (movingForward)
             {
-                distanceVector = new Vector2(currentPos.X - lastPos.X, currentPos.Y - lastPos.Y);
+                directionVector = new Vector2(currentPos.X - lastPos.X, currentPos.Y - lastPos.Y);
             }
             if (!movingForward)
             {
-                distanceVector = new Vector2(lastPos.X - currentPos.X, lastPos.Y - currentPos.Y);
+                directionVector = new Vector2(lastPos.X - currentPos.X, lastPos.Y - currentPos.Y);
             }
 
-            angle = (float)Math.Atan2(distanceVector.Y, distanceVector.X);
-
-            angle = MathHelper.ToDegrees(angle);
-
-            //if (angle >= maxAngle)
-            //{
-            //    angle = maxAngle;
-            //}
-
-            //if (angle <= -maxAngle)
-            //{
-            //    angle = -maxAngle;
-            //}
-            //Debug.WriteLine(distanceVector.ToString());
-            //Debug.WriteLine(angle.ToString());
+            angle = (float)Math.Atan2(directionVector.Y, directionVector.X);
 
             rotation = MathHelper.ToRadians(angle);
 
