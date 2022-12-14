@@ -14,8 +14,6 @@ namespace Math_Seminar_2
 {
     internal class Car // or class for path on which travelling objects can be made
     {
-
-
         Vector2 velocity; // vinkelhastiget?
 
         Vector2 origin;
@@ -91,7 +89,7 @@ namespace Math_Seminar_2
 
             angle = (float)Math.Atan2(directionVector.Y, directionVector.X);
 
-            rotation = MathHelper.ToRadians(angle);
+            rotation = angle;
 
         }
 
