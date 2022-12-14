@@ -1,14 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spline;
 using Microsoft.Xna.Framework.Graphics;
-using System.IO;
-using SharpDX.Direct3D9;
-using System.Diagnostics;
+using Spline;
+using System;
 
 namespace Math_Seminar_2
 {

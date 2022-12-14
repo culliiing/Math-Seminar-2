@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Math_Seminar_2
 {
@@ -28,19 +23,19 @@ namespace Math_Seminar_2
         public Ball(Texture2D texture, float speed, float radius)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
+            this.position = new Vector2(0, Game1.windowSize.Y - this.texture.Height);
             this.speed = speed;
             this.scale = radius / (texture.Width / 2);
             this.fired = false;
 
             hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
-        
+
         // Make a ball with default variable values
         public Ball(Texture2D texture)
         {
             this.texture = texture;
-            this.position = new Vector2(0, Game1.windowSize.Y-this.texture.Height);
+            this.position = new Vector2(0, Game1.windowSize.Y - this.texture.Height);
             this.speed = 400f;
             this.scale = 1;
             this.fired = false;
@@ -67,7 +62,7 @@ namespace Math_Seminar_2
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width/2, texture.Height/2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position + new Vector2(texture.Width / 2, texture.Height / 2), null, Color.White, 0, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
             DrawHitbox(spriteBatch);
         }
 

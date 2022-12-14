@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Spline;
 using System.Diagnostics;
-using System.IO;
 
 namespace Math_Seminar_2
 {
@@ -24,7 +23,7 @@ namespace Math_Seminar_2
 
         static RenderTarget2D renderTarget;
         public static RenderTarget2D RenderTarget { get { return renderTarget; } }
-               
+
         Texture2D transparentBackground;
         Texture2D pixel;
 
@@ -85,7 +84,7 @@ namespace Math_Seminar_2
                     Game1.paused = true;
                 }
             }
-            
+
             base.Update(gameTime);
         }
 
